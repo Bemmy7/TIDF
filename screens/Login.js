@@ -2,6 +2,7 @@ import React from 'react';
 import {View,StyleSheet,Dimensions,TextInput,Text,AsyncStorage} from 'react-native';
 import {Container, Header, Content, Form, Item, Input, Label,Button} from 'native-base';
 import firebase from 'firebase';
+import AuthLoading from '../screens/AuthLoadingScreen';
 
 const {width : WIDTH}= Dimensions.get('window');
 const {height : HEIGHT}= Dimensions.get('window');
@@ -22,7 +23,7 @@ export default class Login extends React.Component{
       var t=email;
       var x=t.indexOf('@');
       var un=t.slice(0,x);
-      this.xxx(un);
+      this.AddToDatabase(un);
       console.log(this.state.userToken);
 
       console.log("user")
@@ -49,10 +50,12 @@ export default class Login extends React.Component{
           var x=t.indexOf('@');
           var un=t.slice(0,x);
           this.setState({ userToken: un });
+          var ut="0";
           console.log(this.state.userToken);
-          this.setState({userToken: un+"@Passenger"});
+          firebase.database().ref('users/'+un).once('value',(data)=>{if(data.toJSON().Usertype=='Passenger'){{ut="Passenger"};} else{ut="Driver";};}).then(()=>{}).catch((error)=>{alert("ERROR" + error);});
+          setTimeout(()=>{this.setState({ userToken: un+'@'+ut });},5000);//Delay 5 Sec Before applying
 
-          console.log(this.state.userToken);
+
 
         }).catch((error)=>{
           alert(error);
@@ -66,11 +69,10 @@ export default class Login extends React.Component{
   }
   _signInAsync = async () => {
     await AsyncStorage.setItem('userToken',this.state.userToken ).then(()=>{
-      this.props.navigation.navigate('Home');
+      this.props.navigation.navigate('AuthLoading');
       }).catch((error)=>alert("an error Occoured"));
   };
-  x=()=>{alert("ahhhhhhhhhhhhhhhh");}
-  xxx=(user)=>{
+  AddToDatabase=(user)=>{
 
     var x='users/'+ user;
    firebase.database().ref(x).set(
@@ -84,6 +86,7 @@ export default class Login extends React.Component{
 alert("An Error Occourd Please Try Again.");
    });
 }
+
 
   render() {
     return (
@@ -118,12 +121,7 @@ alert("An Error Occourd Please Try Again.");
            >
           <Text> Signup </Text>
           </Button>
-           <Button
-           style={styles.Signup}
-           onPress={this.x}
-           >
-          <Text>jhgjhgjh</Text>
-          </Button>
+
 
       </View>
     );
@@ -148,17 +146,17 @@ alert("An Error Occourd Please Try Again.");
      paddingLeft: 25,
    },
    login:{
-    width: WIDTH-350,
+    width: WIDTH-205,
     justifyContent:'center',
-    marginLeft: WIDTH/2-150,
+    marginLeft: WIDTH/2-225,
     borderRadius:25,
   },
    Signup:{
      marginTop:14,
-    width: WIDTH-350,
+    width: WIDTH-205,
     color: '#0080ff',
     justifyContent:'center',
-    marginLeft: WIDTH/2-150,
+    marginLeft: WIDTH/2-225,
     borderRadius:25,
    }
  });

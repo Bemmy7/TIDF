@@ -1,5 +1,5 @@
 import React from 'react';
-import {Platform,Dimensions} from 'react-native';
+import {Platform,Dimensions,TouchableOpacity} from 'react-native';
 import {createDrawerNavigator, createAppContainer} from 'react-navigation';
 
 
@@ -8,7 +8,9 @@ import AuthLoadingScreen from '../screens/AuthLoadingScreen';
 import Mapview from '../screens/Mapview';
 import Login from '../screens/Login';
 import Settingsscreen from '../screens/Settingsscreen';
+import NationWide from '../screens/NationWide';
 import ProceedScreen from '../screens/ProceedScreen';
+import Popup from '../screens/Popup';
 
 //component imports
 import MenuDrawer from '../components/MenuDrawer';
@@ -26,19 +28,20 @@ const DrawerConfig={
   }
 }
 const DrawerNavigator= createDrawerNavigator({
+
   AuthLoading:{
     screen: AuthLoadingScreen
   },
     Home:{
       screen:Mapview
     },
-    Settings:{
-      screen:Settingsscreen
+    cs:{
+      screen:NationWide
     },
     Login:{
       screen:Login
     },
-    Proceed:{
+    Settings:{
       screen:ProceedScreen
     },
 

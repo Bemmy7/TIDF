@@ -9,17 +9,19 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {Ionicons} from '@expo/vector-icons';
+import Mapview from '../screens/Mapview';
+
 const WIDTH=Dimensions.get("window").width;
+
 export const DestinationButton= function(props){
+
   return(
-    <TouchableOpacity style={styles.container} onPress={()=>{}}>
+    <TouchableOpacity style={styles.container} onPress={()=>{this.showModal()}}>
     <View style={styles.leftcol}>
           <Text style={{fontSize:8}}>{'\u25A0'}</Text>
     </View>
     <View style={styles.centercol}>
-          <Text style={{fontFamily:'sans-serif-thin',fontSize:21,color:'#545454'}}>
-            Pick Me
-          </Text>
+          <Text style={{fontFamily:'sans-serif-thin',fontSize:21,color:'#545454'}}>Pick ME</Text>
 
     </View>
     <View style={styles.rightcol}>

@@ -7,15 +7,15 @@ import {
   StyleSheet,
   Image,
   View,
-  Dimensions,
   Text,
+  Dimensions
 } from 'react-native';
 var src=require('../assets/loading.gif');
 import MenuButton from '../components/MenuButton';
 
 const WIDTH= Dimensions.get('window').width;
 
-export default class ProceedScreen extends React.Component {
+export default class NationWide extends React.Component {
   render() {
     return (
       <View style={styles.container}>
@@ -31,6 +31,7 @@ export default class ProceedScreen extends React.Component {
   }
 
 
+
 }
 const styles = StyleSheet.create({
   container: {
@@ -38,6 +39,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#DB6184'
+
 
   },
   img:{

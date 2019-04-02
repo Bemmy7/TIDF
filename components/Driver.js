@@ -32,7 +32,7 @@ export default class Driver extends React.Component {
             ref={marker=>{this.marker= marker }}
             style={{width:50,height:50}}
       ><Image
-          source={require('../assets/ss.png')}
+          source={require('../assets/Taxi.png')}
           style={{
             width:32,
             height:32

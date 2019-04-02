@@ -6,8 +6,12 @@ import {
   StatusBar,
   StyleSheet,
   View,
+  ImageBackground,
+  Dimensions
 } from 'react-native';
-
+const {width : WIDTH}= Dimensions.get('window');
+const {height : HEIGHT}= Dimensions.get('window');
+var src=require('../assets/SplashScreen.jpg');
 
 export default class AuthLoadingScreen extends React.Component {
   constructor() {
@@ -19,9 +23,6 @@ export default class AuthLoadingScreen extends React.Component {
   _bootstrapAsync = async () => {
     const userToken = await AsyncStorage.getItem('userToken');
 
-    // This will switch to the App screen or Auth screen and this loading
-    // screen will be unmounted and thrown away.
-    console.log("This is :" + userToken);
     this.props.navigation.navigate(userToken ? 'Home' : 'Login');
   };
 
@@ -29,7 +30,9 @@ export default class AuthLoadingScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <ActivityIndicator />
+      <ImageBackground source={src} style={styles.Image}>
+      <ActivityIndicator />
+          </ImageBackground>
 
 
         <StatusBar barStyle="default" />
@@ -43,7 +46,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor:"#696969",
+    backgroundColor:"#fff",
     justifyContent: 'center',
   },
+  Image: {
+  flex: 1,
+  flexDirection: 'column',
+  alignItems:'center',
+  justifyContent:'center',
+  width : WIDTH,
+  height : HEIGHT
+},
 });
