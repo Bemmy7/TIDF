@@ -71,11 +71,11 @@ export default class App extends React.Component {
       longitudeDelta,
     })
   }
+
   render() {
     return (
       <View style={styles.container}>
       <DrawerNavigator/>
-
       </View>
     );
   }
